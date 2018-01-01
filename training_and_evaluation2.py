@@ -43,7 +43,7 @@ def load_pretrained_weights(weights_file_path, image_shape):
 
 #validation_generator, nb_val_samples=validation_image_count,
 
-def train_model(train_generator, nb_epoch, checkpoint, validation_generator, nb_val_samples, batch_size, samples_per_epoch, initial_epoch, image_shape, weights_file_path):
+def train_model(train_generator, nb_epoch, checkpoint, validation_data, nb_val_samples, batch_size, samples_per_epoch, initial_epoch, image_shape, weights_file_path):
 	if weights_file_path != '':
 		model = load_pretrained_weights(weights_file_path=weights_file_path, image_shape=image_shape)
 	else:
