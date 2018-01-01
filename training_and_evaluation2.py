@@ -23,7 +23,7 @@ def create_model(image_shape):
 	#Classification layers:
 	model.add(Flatten())
 
-	model.add(Dense(output_dim=256, activation='linear'))
+	model.add(Dense(output_dim=128, activation='linear'))
 	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
