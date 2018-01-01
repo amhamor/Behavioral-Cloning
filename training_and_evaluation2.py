@@ -43,7 +43,7 @@ def create_model(image_shape):
 	#Classification layers:
 	model.add(Flatten())
 
-	model.add(Dense(output_dim=4096, activation='linear'))
+	model.add(Dense(output_dim=4096, activation='tanh'))
 	model.add(BatchNormalization())
 	model.add(Dropout(0.50))
 
