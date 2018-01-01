@@ -2,7 +2,7 @@ import csv
 import numpy as np
 
 from scipy.ndimage import imread
-from image_processor import *
+from image_processor2 import *
 
 from keras.utils.np_utils import to_categorical
 
@@ -56,7 +56,7 @@ def image_and_steering_angle_generator(csv_file_path, batch_size):
 		for image_file_paths_batch, steering_angles_batch in zip(image_file_paths_generator, steering_angles_generator):
 			steering_angles_batch = steering_angles_batch.astype(float)
 			if image_file_paths_generator == left_image_file_paths_generator:
-				steering_angles_batch += 0.01
+				steering_angles_batch = np.zeros(steering_angles_batch.shape) + 0.01
 			if image_file_paths_generator == right_image_file_paths_generator:
 				steering_angles_batch -= 0.01
 
