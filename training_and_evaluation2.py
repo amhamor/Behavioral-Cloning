@@ -47,15 +47,7 @@ def create_model(image_shape):
 	model.add(BatchNormalization())
 	model.add(Dropout(0.50))
 
-	model.add(Dense(output_dim=2048, activation='tanh'))
-	model.add(BatchNormalization())
-	model.add(Dropout(0.50))
-
-	model.add(Dense(output_dim=1024, activation='linear'))
-	model.add(BatchNormalization())
-	model.add(Dropout(0.50))
-
-	model.add(Dense(output_dim=512, activation='tanh'))
+	model.add(Dense(output_dim=1024, activation='tanh'))
 	model.add(BatchNormalization())
 	model.add(Dropout(0.50))
 
@@ -63,11 +55,7 @@ def create_model(image_shape):
 	model.add(BatchNormalization())
 	model.add(Dropout(0.50))
 
-	model.add(Dense(output_dim=128, activation='tanh'))
-	model.add(BatchNormalization())
-	model.add(Dropout(0.50))
-
-	model.add(Dense(output_dim=64, activation='linear'))
+	model.add(Dense(output_dim=64, activation='tanh'))
 	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
