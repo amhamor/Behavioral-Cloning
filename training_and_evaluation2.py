@@ -43,7 +43,7 @@ def load_pretrained_weights(weights_file_path, image_shape):
 
 #validation_generator, nb_val_samples=validation_image_count,
 
-def train_model(train_generator, nb_epoch, checkpoint, validation_data, nb_val_samples, batch_size, samples_per_epoch, initial_epoch, image_shape, weights_file_path):
+def train_model(train_generator, nb_epoch, checkpoint, validation_generator, nb_val_samples, batch_size, samples_per_epoch, initial_epoch, image_shape, weights_file_path):
 	if weights_file_path != '':
 		model = load_pretrained_weights(weights_file_path=weights_file_path, image_shape=image_shape)
 	else:
@@ -53,7 +53,7 @@ def train_model(train_generator, nb_epoch, checkpoint, validation_data, nb_val_s
 	model.compile(loss='mean_squared_error', optimizer='adadelta')
 
 	#Trainer:
-	model.fit_generator(generator=train_generator, samples_per_epoch=samples_per_epoch, nb_epoch=nb_epoch, callbacks=[checkpoint], validation_data=validation_generator, nb_val_samples=nb_val_samples, max_q_size=batch_size, initial_epoch=initial_epoch)
+	model.fit_generator(generator=train_generator, samples_per_epoch=samples_per_epoch, nb_epoch=nb_epoch, callbacks=[checkpoint], validation_data=validation_data, nb_val_samples=nb_val_samples, max_q_size=batch_size, initial_epoch=initial_epoch)
 
 	#Save the model as a .h5 file.
 	#model.save(training_driving_log_file_path[16:] + '_model.h5')
