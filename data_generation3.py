@@ -4,7 +4,7 @@ from scipy.ndimage import imread
 from image_processor import *
 
 def get_image_and_steering_angle_data(csv_file_path):
-	with open(csv_file_path, 'rb') as csv_file_object:
+	with open(csv_file_path, 'r') as csv_file_object:
 		image_data = []
 		steering_angle_data = []
 		header_and_offset_list = [('Center Camera Images', 0), ('Left Camera Images', 0.1), ('Right Camera Images', -0.1)]
