@@ -63,4 +63,4 @@ def batch_generator(input_data, label_data, batch_size, shuffle=True):
 			input_data_batch = shuffled_input_data[start_index:end_index]
 			label_data_batch = shuffled_label_data[start_index:end_index]
 
-			yield input_data_batch, label_data_batch
+			yield (input_data_batch, label_data_batch)
