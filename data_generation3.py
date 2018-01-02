@@ -19,4 +19,4 @@ def get_image_and_steering_angle_data(csv_file_path):
 
 				steering_angle_data.append(float(row['Steering Angle']) + offset)
 
-	return np.array(np.array(image_data), np.array(steering_angle_data))
+	return np.array([np.array(image_data), np.array(steering_angle_data)])
