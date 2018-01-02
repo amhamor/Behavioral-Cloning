@@ -2,7 +2,7 @@ import csv
 import numpy as np
 
 from scipy.ndimage import imread
-from image_processor2 import *
+from image_processor import *
 
 from keras.utils.np_utils import to_categorical
 

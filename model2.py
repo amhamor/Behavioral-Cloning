@@ -3,7 +3,7 @@ import tensorflow as tf
 
 import os.path
 
-from image_processor2 import *
+from image_processor import *
 from data_generation2 import *
 from training_and_evaluation2 import *
 
