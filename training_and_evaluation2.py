@@ -45,35 +45,35 @@ def create_model(image_shape):
 	model.add(Flatten())
 
 	model.add(Dense(output_dim=4096, activation='tanh'))
-	model.add(BatchNormalization())
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=2048, activation='linear'))
-	model.add(BatchNormalization())
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=1024, activation='tanh'))
-	model.add(BatchNormalization())
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=512, activation='linear'))
-	model.add(BatchNormalization())
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=256, activation='tanh'))
-	model.add(BatchNormalization())
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=128, activation='linear'))
-	model.add(BatchNormalization())
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=64, activation='tanh'))
-	model.add(BatchNormalization())
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=32, activation='linear'))
-	model.add(BatchNormalization())
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	#Output layer:
