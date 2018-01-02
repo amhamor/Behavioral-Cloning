@@ -33,26 +33,26 @@ def create_model(image_shape):
 	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
 	model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=1024, nb_row=3, nb_col=3, activation='relu', border_mode='same'))
-	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
-	model.add(BatchNormalization())
+	#model.add(Convolution2D(nb_filter=1024, nb_row=3, nb_col=3, activation='relu', border_mode='same'))
+	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
+	#model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=2048, nb_row=3, nb_col=3, activation='relu', border_mode='same'))
-	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
-	model.add(BatchNormalization())
+	#model.add(Convolution2D(nb_filter=2048, nb_row=3, nb_col=3, activation='relu', border_mode='same'))
+	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
+	#model.add(BatchNormalization())
 
 	#Classification layers:
 	model.add(Flatten())
 
-	model.add(Dense(output_dim=3096, activation='tanh'))
-	model.add(BatchNormalization())
+	#model.add(Dense(output_dim=3096, activation='tanh'))
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=2048, activation='linear'))
 	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
-	model.add(Dense(output_dim=1024, activation='tanh'))
+	model.add(Dense(output_dim=2048, activation='tanh'))
 	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
