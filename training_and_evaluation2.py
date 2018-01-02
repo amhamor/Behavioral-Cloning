@@ -44,36 +44,20 @@ def create_model(image_shape):
 	#Classification layers:
 	model.add(Flatten())
 
-	#model.add(Dense(output_dim=3096, activation='tanh'))
-	#model.add(BatchNormalization())
-	#model.add(Dropout(0.50))
-
-	#model.add(Dense(output_dim=2048, activation='linear'))
-	#model.add(BatchNormalization())
-	#model.add(Dropout(0.50))
-
 	model.add(Dense(output_dim=1164, activation='tanh'))
 	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=100, activation='linear'))
-	#model.add(BatchNormalization())
+	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=50, activation='tanh'))
-	#model.add(BatchNormalization())
+	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=10, activation='linear'))
-	#model.add(BatchNormalization())
-	#model.add(Dropout(0.50))
-
-	#model.add(Dense(output_dim=64, activation='linear'))
-	#model.add(BatchNormalization())
-	#model.add(Dropout(0.50))
-
-	#model.add(Dense(output_dim=32, activation='linear'))
-	#model.add(BatchNormalization())
+	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	#Output layer:
