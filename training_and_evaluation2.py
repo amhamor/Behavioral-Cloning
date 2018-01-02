@@ -8,6 +8,7 @@ from keras import backend as K
 
 def create_model(image_shape):
 	print('Creating steering angle prediction model.')
+	print('image_shape: {}'.format(image_shape))
 
 	model = Sequential()
 	model.add(BatchNormalization(input_shape=image_shape))
