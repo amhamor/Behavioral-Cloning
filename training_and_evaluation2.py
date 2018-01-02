@@ -10,10 +10,10 @@ def create_model(image_shape):
 	print('Creating steering angle prediction model.')
 
 	model = Sequential()
-	#model.add(BatchNormalization(input_shape=image_shape))
+	model.add(BatchNormalization(input_shape=image_shape))
 
 	#Convolutional layers:
-	model.add(Convolution2D(nb_filter=64, nb_row=5, nb_col=5, activation='relu', border_mode='same', input_shape=image_shape))
+	model.add(Convolution2D(nb_filter=64, nb_row=5, nb_col=5, activation='relu', border_mode='same'))
 	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
 	#model.add(BatchNormalization())
 
@@ -38,7 +38,7 @@ def create_model(image_shape):
 	#model.add(BatchNormalization())
 
 	model.add(Convolution2D(nb_filter=2048, nb_row=3, nb_col=3, activation='relu', border_mode='same', input_shape=image_shape))
-	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
+	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
 	#model.add(BatchNormalization())
 
 	#Classification layers:
