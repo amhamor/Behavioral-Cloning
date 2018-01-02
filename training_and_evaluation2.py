@@ -44,7 +44,7 @@ def create_model(image_shape):
 	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
 	model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=4096, nb_row=2, nb_col=2, activation='relu', border_mode='same', input_shape=image_shape))
+	#model.add(Convolution2D(nb_filter=4096, nb_row=2, nb_col=2, activation='relu', border_mode='same', input_shape=image_shape))
 	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
 	model.add(BatchNormalization())
 
