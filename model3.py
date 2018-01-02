@@ -24,10 +24,13 @@ else:
 	training_data = np.load('training_data.npy')
 
 image_data, steering_angle_data = training_data
+print('image_data.shape: {}'.format(image_data.shape))
+print('steering_angle_data.shape: {}'.format(steering_angle_data.shape))
 
 if npy_validation_data_file_path == '':
 	validation_data = get_image_and_steering_angle_data(csv_file_path=validation_driving_log_file_path)
 	np.save('validation_data.npy', validation_data[1])
+	print('validation_data saved as validation_data.npy.')
 else:
 	validation_data = np.load('validation_data.npy')
 
