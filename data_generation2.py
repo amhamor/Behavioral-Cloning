@@ -1,4 +1,5 @@
 '''Note: The batch_generator function is the result of looking at the batch_iter function at https://gist.github.com/Hironsan/e041d6606164bc14c50aa56b989c5fc0.'''
+import os
 
 import csv
 import numpy as np
@@ -9,23 +10,38 @@ from image_processor import *
 from keras.utils.np_utils import to_categorical
 
 def get_image_and_steering_angle_data(csv_file_path):
-	image_data = []
-	steering_angle_data = []
-	header_and_offset_list = [('Center Camera Images', 0), ('Left Camera Images', 0.1), ('Right Camera Images', -0.1)]
+	if os.path.exists('./image_data.npy'):
+		image_data = np.load('image_data.npy')
+		print('image_data loaded from image_data.npy.')
+		steering_angle_data = np.load('steering_angle_data.npy')
+		print('steering_angle_data loaded from steering_angle_data.npy.')
 
-	with open(csv_file_path, 'r') as csv_file_object:
-		dict_reader = csv.DictReader(csv_file_object)
-		for row in dict_reader:
-			for header, offset in header_and_offset_list:
-				image = imread(fname=row['Center Camera Images'], mode='L')
-				image = crop_image(image=image)
-				image = normalize_image(image=image)
-				image = np.expand_dims(image, axis=2)
-				image_data.append(image)
+	else:	
+		image_data = []
+		steering_angle_data = []
+		header_and_offset_list = [('Center Camera Images', 0), ('Left Camera Images', 0.1), ('Right Camera Images', -0.1)]
 
-				steering_angle_data.append(float(row['Steering Angle']) + offset)
+		with open(csv_file_path, 'r') as csv_file_object:
+			dict_reader = csv.DictReader(csv_file_object)
+			for row in dict_reader:
+				for header, offset in header_and_offset_list:
+					image = imread(fname=row['Center Camera Images'], mode='L')
+					image = crop_image(image=image)
+					image = normalize_image(image=image)
+					image = np.expand_dims(image, axis=2)
+					image_data.append(image)
 
-	return [np.array(image_data), np.array(steering_angle_data)]
+					steering_angle_data.append(float(row['Steering Angle']) + offset)
+
+		image_data = np.array(image_data)
+		steering_angle_data = np.array(steering_angle_data)
+
+		np.save('image_data.npy', image_data)
+		print('image_data saved to image_data.npy.')
+		np.save('steering_angle_data.npy', steering_angle_data)
+		print('steering_angle_data saved to steering_angle_data.npy.')
+
+	return [image_data, steering_angle_data]
 
 def batch_generator(input_data, label_data, batch_size, shuffle=True):
 	data_size = len(input_data)

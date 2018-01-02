@@ -19,8 +19,6 @@ training_data = get_image_and_steering_angle_data(csv_file_path=training_driving
 
 validation_data = get_image_and_steering_angle_data(csv_file_path=validation_driving_log_file_path)
 
-train_row_count, image_shape = get_row_count_and_image_shape(csv_file_path=training_driving_log_file_path)
-
 train_generator = batch_generator(input_data=training_data[0], label_data=training_data[1], batch_size=batch_size)
 
 validation_generator = batch_generator(input_data=validation_data[0], label_data=validation_data[1], batch_size=batch_size)
