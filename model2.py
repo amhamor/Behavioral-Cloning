@@ -23,7 +23,7 @@ train_generator = batch_generator(input_data=training_data[0], label_data=traini
 
 validation_generator = batch_generator(input_data=validation_data[0], label_data=validation_data[1], batch_size=batch_size)
 
-samples_per_epoch = len(image_data)
+samples_per_epoch = len(training_data[0])
 image_shape = image_data[0].shape
 
 nb_val_samples = len(validation_data[0])
