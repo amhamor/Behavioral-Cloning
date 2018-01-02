@@ -49,13 +49,15 @@ def batch_generator(input_data, label_data, batch_size, shuffle=True):
 	
 	while True:
 		if shuffle:
-			shuffle_indices = np.random.permutation(np.arange(data_size))
-			input_data = input_data[shuffle_indices]
-			label_data = label_data[shuffle_indices]
+			indices = np.random.permutation(np.arange(data_size))
+		else:
+			indices = np.arange(data_size)
 
 		for batch_number in range(0, batches_per_epoch_count):
 			start_index = batch_number * batch_size
 			end_index = min((batch_number + 1) * batch_size, data_size)
+
+			indices_batch = indices[start_index:end_index]
 			
 			input_data_batch = input_data[start_index:end_index]
 			label_data_batch = label_data[start_index:end_index]
