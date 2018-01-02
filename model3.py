@@ -16,6 +16,7 @@ initial_epoch = 0
 nb_epoch = 10000
 
 training_data = get_image_and_steering_angle_data(csv_file_path=training_driving_log_file_path)
+print('training_data: {}'.format(training_data))
 image_data, steering_angle_data = zip(training_data[0], training_data[1])
 
 validation_data = get_image_and_steering_angle_data(csv_file_path=validation_driving_log_file_path)
