@@ -8,68 +8,71 @@ from keras import backend as K
 
 def create_model(image_shape):
 	print('Creating steering angle prediction model.')
-	print('image_shape: {}'.format(image_shape))
 
 	model = Sequential()
-	model.add(BatchNormalization(input_shape=image_shape))
+	model.add(BatchNormalization(input_shape=image_shape)) #image shape: 75x320
 
 	#Convolutional layers:
 	model.add(Convolution2D(nb_filter=64, nb_row=5, nb_col=5, activation='relu', border_mode='same'))
-	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
-	#model.add(BatchNormalization())
+	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
+	model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=128, nb_row=5, nb_col=5, activation='relu', border_mode='same', input_shape=image_shape))
-	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
-	#model.add(BatchNormalization())
+	model.add(Convolution2D(nb_filter=128, nb_row=5, nb_col=5, activation='relu', border_mode='same'))
+	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
+	model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=256, nb_row=5, nb_col=5, activation='relu', border_mode='same', input_shape=image_shape))
-	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
-	#model.add(BatchNormalization())
+	model.add(Convolution2D(nb_filter=256, nb_row=5, nb_col=5, activation='relu', border_mode='same'))
+	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
+	model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=512, nb_row=5, nb_col=5, activation='relu', border_mode='same', input_shape=image_shape))
-	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
-	#model.add(BatchNormalization())
+	model.add(Convolution2D(nb_filter=512, nb_row=5, nb_col=5, activation='relu', border_mode='same'))
+	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
+	model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=1024, nb_row=3, nb_col=3, activation='relu', border_mode='same', input_shape=image_shape))
-	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
-	#model.add(BatchNormalization())
+	model.add(Convolution2D(nb_filter=1024, nb_row=3, nb_col=3, activation='relu', border_mode='same'))
+	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
+	model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=1500, nb_row=3, nb_col=3, activation='relu', border_mode='same', input_shape=image_shape))
-	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
-	#model.add(BatchNormalization())
+	model.add(Convolution2D(nb_filter=1024, nb_row=3, nb_col=3, activation='relu', border_mode='same'))
+	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
+	model.add(BatchNormalization())
 
-	#model.add(Convolution2D(nb_filter=2048, nb_row=3, nb_col=3, activation='relu', border_mode='same', input_shape=image_shape))
-	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
-	#model.add(BatchNormalization())
+	model.add(Convolution2D(nb_filter=2048, nb_row=3, nb_col=3, activation='relu', border_mode='same'))
+	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
+	model.add(BatchNormalization())
 
 	#Classification layers:
 	model.add(Flatten())
 
-	model.add(Dense(output_dim=2048, activation='tanh'))
+	model.add(Dense(output_dim=4096, activation='tanh'))
 	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
-	model.add(Dense(output_dim=1500, activation='linear'))
+	model.add(Dense(output_dim=2048, activation='linear'))
 	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
-	model.add(Dense(output_dim=1000, activation='tanh'))
+	model.add(Dense(output_dim=1024, activation='tanh'))
 	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
-	model.add(Dense(output_dim=500, activation='linear'))
+	model.add(Dense(output_dim=512, activation='linear'))
 	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
-	model.add(Dense(output_dim=128, activation='tanh'))
+	model.add(Dense(output_dim=256, activation='tanh'))
 	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
-	model.add(Dense(output_dim=100, activation='linear'))
+	model.add(Dense(output_dim=128, activation='linear'))
 	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=64, activation='tanh'))
+	#model.add(BatchNormalization())
+	#model.add(Dropout(0.50))
+
+	model.add(Dense(output_dim=32, activation='linear'))
 	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
