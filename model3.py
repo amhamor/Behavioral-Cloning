@@ -16,14 +16,14 @@ batch_size = 64
 initial_epoch = 0
 nb_epoch = 10000
 
-image_data, steering_angle_data = training_data[0], training_data[1]
-
 if npy_training_data_file_path == '':
 	training_data = get_image_and_steering_angle_data(csv_file_path=training_driving_log_file_path)
 	np.save('training_data.npy', training_data[0])
 	print('training_data saved as training_data.npy.')
 else:
 	training_data = np.load('training_data.npy')
+
+image_data, steering_angle_data = training_data
 
 if npy_validation_data_file_path == '':
 	validation_data = get_image_and_steering_angle_data(csv_file_path=validation_driving_log_file_path)
