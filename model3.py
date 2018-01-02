@@ -22,7 +22,9 @@ if npy_training_data_file_path == '':
 	print('training_data saved as training_data.npy.')
 else:
 	training_data = np.load('training_data.npy')
+	print('training_data loaded from training_data.npy.')
 
+print('training_data.shape: {}'.format(training_data.shape))
 image_data, steering_angle_data = training_data
 print('image_data.shape: {}'.format(image_data.shape))
 print('steering_angle_data.shape: {}'.format(steering_angle_data.shape))
@@ -33,6 +35,7 @@ if npy_validation_data_file_path == '':
 	print('validation_data saved as validation_data.npy.')
 else:
 	validation_data = np.load('validation_data.npy')
+	print('validation_data loaded from validation_data.npy.')
 
 image_shape = image_data[0].shape
 
