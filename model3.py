@@ -8,8 +8,8 @@ from training_and_evaluation3 import *
 
 training_driving_log_file_path = './training_data/training_driving_log.csv'
 validation_driving_log_file_path = './training_data/validation_driving_log.csv'
-npy_training_data_file_path = ''
-npy_validation_data_file_path = ''
+npy_training_data_file_path = 'training_data.npy'
+npy_validation_data_file_path = 'validation_data.npy'
 weights_file_path = ''
 
 batch_size = 64
