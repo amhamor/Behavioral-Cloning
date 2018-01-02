@@ -10,7 +10,7 @@ def create_model(image_shape):
 	print('Creating steering angle prediction model.')
 
 	model = Sequential()
-	model.add(BatchNormalization(input_shape=image_shape)) #image shape: 75x320
+	#model.add(BatchNormalization(input_shape=image_shape)) #image shape: 75x320
 
 	#Convolutional layers:
 	model.add(Convolution2D(nb_filter=64, nb_row=5, nb_col=5, activation='relu', border_mode='same'))
@@ -44,36 +44,36 @@ def create_model(image_shape):
 	#Classification layers:
 	model.add(Flatten())
 
-	model.add(Dense(output_dim=4096, activation='tanh'))
-	#model.add(BatchNormalization())
+	model.add(Dense(output_dim=3096, activation='tanh'))
+	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=2048, activation='linear'))
-	#model.add(BatchNormalization())
+	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=1024, activation='tanh'))
-	#model.add(BatchNormalization())
+	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=512, activation='linear'))
-	#model.add(BatchNormalization())
+	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=256, activation='tanh'))
-	#model.add(BatchNormalization())
+	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=128, activation='linear'))
-	#model.add(BatchNormalization())
+	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=64, activation='tanh'))
-	#model.add(BatchNormalization())
+	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=32, activation='linear'))
-	#model.add(BatchNormalization())
+	model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	#Output layer:
