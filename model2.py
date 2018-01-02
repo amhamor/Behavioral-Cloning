@@ -32,4 +32,4 @@ nb_val_samples = len(validation_data[0])
 
 checkpoint = ModelCheckpoint(filepath='model_checkpoint_' + training_driving_log_file_path[16:] + '_{epoch}_{loss}.hdf5')
 
-train_model(train_generator=train_generator, nb_epoch=nb_epoch, checkpoint=checkpoint, validation_data=validation_generator, nb_val_samples=nb_val_samples, batch_size=batch_size, samples_per_epoch=sample_per_epoch, initial_epoch=initial_epoch, image_shape=image_shape, weights_file_path=weights_file_path)
+train_model(train_generator=train_generator, nb_epoch=nb_epoch, checkpoint=checkpoint, validation_data=validation_generator, nb_val_samples=nb_val_samples, batch_size=batch_size, samples_per_epoch=samples_per_epoch, initial_epoch=initial_epoch, image_shape=image_shape, weights_file_path=weights_file_path)
