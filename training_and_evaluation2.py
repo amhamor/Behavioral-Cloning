@@ -12,19 +12,19 @@ def create_model(image_shape):
 	model = Sequential()
 
 	#Convolutional layers:
-	model.add(Convolution2D(nb_filter=3, nb_row=5, nb_col=5, activation='relu', border_mode='same', subsample=(2, 2), input_shape=image_shape)) #image shape: 37x160
+	model.add(Convolution2D(nb_filter=24, nb_row=5, nb_col=5, activation='relu', border_mode='same', subsample=(2, 2), input_shape=image_shape)) #image shape: 37x160
 	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
 	#model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=24, nb_row=5, nb_col=5, activation='relu', border_mode='same', subsample=(2 ,2))) #image shape: 18x80
+	model.add(Convolution2D(nb_filter=36, nb_row=5, nb_col=5, activation='relu', border_mode='same', subsample=(2 ,2))) #image shape: 18x80
 	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same')) 
 	#model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=36, nb_row=5, nb_col=5, activation='relu', border_mode='valid', subsample=(2, 2))) #image shape: 7x38
+	model.add(Convolution2D(nb_filter=48, nb_row=5, nb_col=5, activation='relu', border_mode='valid', subsample=(2, 2))) #image shape: 7x38
 	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
 	#model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=48, nb_row=3, nb_col=3, activation='relu', border_mode='valid')) #image shape: 5x36
+	model.add(Convolution2D(nb_filter=64, nb_row=3, nb_col=3, activation='relu', border_mode='valid')) #image shape: 5x36
 	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same')) #image shape: 1x17
 	#model.add(BatchNormalization())
 
