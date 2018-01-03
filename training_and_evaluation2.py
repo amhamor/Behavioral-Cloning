@@ -48,7 +48,7 @@ def train_model(train_generator, nb_epoch, checkpoint, validation_data, nb_val_s
 		model = create_model(image_shape=image_shape)
 
 	#Optimizer:
-	model.compile(loss='mean_squared_error', optimizer='adadelta')
+	model.compile(loss='mean_squared_error', optimizer='adam')
 
 	#Trainer:
 	model.fit_generator(generator=train_generator, samples_per_epoch=samples_per_epoch, nb_epoch=nb_epoch, callbacks=[checkpoint], validation_data=validation_data, nb_val_samples=nb_val_samples, max_q_size=batch_size, initial_epoch=initial_epoch)
