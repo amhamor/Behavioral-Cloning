@@ -21,9 +21,11 @@ def create_model(image_shape):
 	#Classification layers:
 	model.add(Flatten())
 
+	model.add(Dense(output_dim=225, activation='tanh'))
+	model.add(Dense(output_dim=160, activation='linear'))
 	model.add(Dense(output_dim=100, activation='tanh'))
 	model.add(Dense(output_dim=50, activation='linear'))
-	model.add(Dense(output_dim=10, activation='linear'))
+	model.add(Dense(output_dim=10, activation='tanh'))
 
 	#Output layer:
 	model.add(Dense(output_dim=1, activation='linear'))
