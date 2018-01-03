@@ -57,7 +57,7 @@ def create_model(image_shape):
 	#model.add(Dropout(0.50))
 
 	#Output layer:
-	model.add(Dense(output_dim=1, activation='tanh'))
+	model.add(Dense(output_dim=1, activation='linear'))
 
 	return model
 
