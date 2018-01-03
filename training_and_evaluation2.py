@@ -22,7 +22,9 @@ def create_model(image_shape):
 	model.add(Flatten())
 
 	model.add(Dense(output_dim=100, activation='linear'))
+	model.add(Dropout(0.50))
 	model.add(Dense(output_dim=50, activation='linear'))
+	model.add(Dropout(0.50))
 	model.add(Dense(output_dim=10, activation='linear'))
 
 	#Output layer:
