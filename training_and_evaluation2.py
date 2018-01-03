@@ -44,10 +44,6 @@ def create_model(image_shape):
 	#Classification layers:
 	model.add(Flatten())
 
-	model.add(Dense(output_dim=1164, activation='linear'))
-	#model.add(BatchNormalization())
-	#model.add(Dropout(0.50))
-
 	model.add(Dense(output_dim=100, activation='linear'))
 	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
