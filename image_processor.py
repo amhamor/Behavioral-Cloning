@@ -1,7 +1,7 @@
 import numpy as np
 
 def normalize_image(image, maximum_pixel_value=255, minimum_pixel_value=0):
-	return (image - minimum_pixel_value) / (maximum_pixel_value - minimum_pixel_value)
+	return (image - minimum_pixel_value) / (maximum_pixel_value - minimum_pixel_value) - 0.5
 
 def crop_image(image, top_x_pixel_removal_count=60, bottom_x_pixel_removal_count=25):
 #The following x and y variables are in reference to scipy.ndimage (i.e. the origin is in the top left corner of the image):

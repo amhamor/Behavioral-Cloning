@@ -10,19 +10,19 @@ def create_model(image_shape):
 	print('Creating steering angle prediction model.')
 
 	model = Sequential()
-	model.add(BatchNormalization(input_shape=image_shape)) #image shape: 75x320
+	#model.add(BatchNormalization(input_shape=image_shape)) #image shape: 75x320
 
 	#Convolutional layers:
-	model.add(Convolution2D(nb_filter=3, nb_row=5, nb_col=5, activation='relu', border_mode='same'))
-	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same')) #image shape: 37x160
+	model.add(Convolution2D(nb_filter=3, nb_row=5, nb_col=5, activation='relu', border_mode='same', subsample=(2, 2))) #image shape: 37x160
+	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
 	#model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=24, nb_row=5, nb_col=5, activation='relu', border_mode='same'))
-	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same')) #image shape: 18x80
+	model.add(Convolution2D(nb_filter=24, nb_row=5, nb_col=5, activation='relu', border_mode='same', subsample=(2 ,2))) #image shape: 18x80
+	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same')) 
 	#model.add(BatchNormalization())
 
-	model.add(Convolution2D(nb_filter=36, nb_row=5, nb_col=5, activation='relu', border_mode='valid')) #image shape: 14x76
-	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same')) #image shape: 7x38
+	model.add(Convolution2D(nb_filter=36, nb_row=5, nb_col=5, activation='relu', border_mode='valid', subsample=(2, 2))) #image shape: 7x38
+	#model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), border_mode='same'))
 	#model.add(BatchNormalization())
 
 	model.add(Convolution2D(nb_filter=48, nb_row=5, nb_col=5, activation='relu', border_mode='valid')) #image shape: 3x34
@@ -44,20 +44,20 @@ def create_model(image_shape):
 	#Classification layers:
 	model.add(Flatten())
 
-	model.add(Dense(output_dim=1164, activation='tanh'))
-	model.add(BatchNormalization())
+	model.add(Dense(output_dim=1164, activation='linear'))
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=100, activation='linear'))
-	model.add(BatchNormalization())
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
-	model.add(Dense(output_dim=50, activation='tanh'))
-	model.add(BatchNormalization())
+	model.add(Dense(output_dim=50, activation='linear'))
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	model.add(Dense(output_dim=10, activation='linear'))
-	model.add(BatchNormalization())
+	#model.add(BatchNormalization())
 	#model.add(Dropout(0.50))
 
 	#Output layer:
