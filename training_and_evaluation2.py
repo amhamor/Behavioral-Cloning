@@ -13,23 +13,17 @@ def create_model(image_shape):
 
 	#Convolutional layers:
 	model.add(Convolution2D(nb_filter=24, nb_row=5, nb_col=5, activation='relu', border_mode='valid', subsample=(2, 2), input_shape=image_shape)) #image shape: 35x158
-
 	model.add(Convolution2D(nb_filter=36, nb_row=5, nb_col=5, activation='relu', border_mode='valid', subsample=(2 ,2))) #image shape: 15x77
-
 	model.add(Convolution2D(nb_filter=48, nb_row=5, nb_col=5, activation='relu', border_mode='valid', subsample=(2, 2))) #image shape: 5x36
-
 	model.add(Convolution2D(nb_filter=64, nb_row=3, nb_col=3, activation='relu', border_mode='valid')) #image shape: 3x34
-
 	model.add(Convolution2D(nb_filter=64, nb_row=3, nb_col=3, activation='relu', border_mode='valid')) #image shape: 1x32
 
 	#Classification layers:
 	model.add(Flatten())
 
-	model.add(Dense(output_dim=100, activation='linear'))
-
+	model.add(Dense(output_dim=100, activation='tanh'))
 	model.add(Dense(output_dim=50, activation='linear'))
-
-	model.add(Dense(output_dim=10, activation='linear'))
+	model.add(Dense(output_dim=10, activation='tanh'))
 
 	#Output layer:
 	model.add(Dense(output_dim=1, activation='linear'))
