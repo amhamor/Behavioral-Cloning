@@ -1,7 +1,6 @@
 from keras.layers import Convolution2D, MaxPooling2D, Dense, Activation, BatchNormalization, Flatten, Dropout
 from keras.models import Sequential
 from keras.callbacks import ModelCheckpoint
-from keras import backend as K
 
 ###Architecture
 ##Build and implement the architecture into the optimizer and accuracy calculator.
@@ -22,9 +21,9 @@ def create_model(image_shape):
 	model.add(Flatten())
 
 	model.add(Dense(output_dim=100, activation='linear'))
-	model.add(Dropout(0.50))
+	#model.add(Dropout(0.50))
 	model.add(Dense(output_dim=50, activation='linear'))
-	model.add(Dropout(0.50))
+	#model.add(Dropout(0.50))
 	model.add(Dense(output_dim=10, activation='linear'))
 
 	#Output layer:
@@ -57,7 +56,3 @@ def train_model(train_generator, nb_epoch, checkpoint, validation_data, nb_val_s
 
 	#Save the model as a .h5 file.
 	#model.save(training_driving_log_file_path[16:] + '_model.h5')
-
-	#Delete model and variables.
-	del model
-	K.clear_session()

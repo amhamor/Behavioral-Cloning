@@ -4,7 +4,7 @@ import os
 import csv
 import numpy as np
 
-from scipy.ndimage import imread
+import matplotlib.image as mpimg
 from image_processor import *
 
 from keras.utils.np_utils import to_categorical
@@ -25,7 +25,7 @@ def get_image_and_steering_angle_data(csv_file_path):
 			dict_reader = csv.DictReader(csv_file_object)
 			for row in dict_reader:
 				for header, offset in header_and_offset_list:
-					image = imread(fname=row['Center Camera Images'], mode='L')
+					image = mpimg.imread(fname=row['Center Camera Images'])
 					image = crop_image(image=image)
 					image = normalize_image(image=image)
 					image = np.expand_dims(image, axis=2)
