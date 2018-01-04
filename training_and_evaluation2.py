@@ -11,6 +11,7 @@ def create_model(image_shape):
 	model = Sequential() #image_shape = 75x320
 
 	#Convolutional layers:
+	print('image_shape: {}'.format(image_shape))
 	model.add(Convolution2D(nb_filter=24, nb_row=5, nb_col=5, activation='relu', border_mode='valid', subsample=(2, 2), input_shape=image_shape)) #image shape: 35x158
 	model.add(Convolution2D(nb_filter=36, nb_row=5, nb_col=5, activation='relu', border_mode='valid', subsample=(2 ,2))) #image shape: 15x77
 	model.add(Convolution2D(nb_filter=48, nb_row=5, nb_col=5, activation='relu', border_mode='valid', subsample=(2, 2))) #image shape: 5x36
