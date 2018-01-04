@@ -28,7 +28,7 @@ def get_image_and_steering_angle_data(csv_file_path):
 					image = mpimg.imread(fname=row['Center Camera Images'])
 					image = crop_image(image=image)
 					image = normalize_image(image=image)
-					image = np.expand_dims(image, axis=2)
+					#image = np.expand_dims(image, axis=2)
 					image_data.append(image)
 
 					steering_angle_data.append(float(row['Steering Angle']) + offset)
