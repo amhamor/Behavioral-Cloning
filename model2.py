@@ -7,8 +7,7 @@ from image_processor import *
 from data_generation2 import *
 from training_and_evaluation2 import *
 
-training_driving_log_file_path = './training_data/sharp_right_curve.csv'
-#training_driving_log_file_path = './training_data/training_driving_log.csv'
+training_driving_log_file_path = './training_data/training_driving_log.csv'
 validation_driving_log_file_path = './training_data/validation_driving_log.csv'
 
 weights_file_path = ''
