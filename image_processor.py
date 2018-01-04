@@ -7,8 +7,9 @@ def crop_image(image, top_x_pixel_removal_count=60, bottom_x_pixel_removal_count
 #The following x and y variables are in reference to scipy.ndimage (i.e. the origin is in the top left corner of the image):
 	x_pixel_count = image.shape[0]
 	y_pixel_count = image.shape[1]
+	z_pixel_count = image.shape[2]
 
-	cropped_image = np.zeros(shape=(x_pixel_count-top_x_pixel_removal_count-bottom_x_pixel_removal_count, y_pixel_count))
+	cropped_image = np.zeros(shape=(x_pixel_count-top_x_pixel_removal_count-bottom_x_pixel_removal_count, y_pixel_count, z_pixel_count))
 
 	#From right to left (top to bottom in reference to scipy.ndimage) of the image, crop out most of the image to the left of the road:
 	cropped_x_pixel_starting_index = 15
@@ -22,10 +23,10 @@ def crop_image(image, top_x_pixel_removal_count=60, bottom_x_pixel_removal_count
 	for cropped_x_pixel_index in range(cropped_x_pixel_starting_index, cropped_x_pixel_ending_index-1, -1):
 		y_pixel_index = int(cropped_x_pixel_index * road_edge_slope) + y_intercept
 
-		cropped_image[cropped_x_pixel_index:, y_pixel_index:y_pixel_ending_index] = image[cropped_x_pixel_index+top_x_pixel_removal_count:x_pixel_count-bottom_x_pixel_removal_count, y_pixel_index:y_pixel_ending_index]
+		cropped_image[cropped_x_pixel_index:, y_pixel_index:y_pixel_ending_index, :] = image[cropped_x_pixel_index+top_x_pixel_removal_count:x_pixel_count-bottom_x_pixel_removal_count, y_pixel_index:y_pixel_ending_index, :]
 
 	#Crop a rectangle in the middle of the image.
-	cropped_image[:, y_pixel_ending_index:235] = image[top_x_pixel_removal_count:x_pixel_count-bottom_x_pixel_removal_count, y_pixel_ending_index:235]
+	cropped_image[:, y_pixel_ending_index:235, :] = image[top_x_pixel_removal_count:x_pixel_count-bottom_x_pixel_removal_count, y_pixel_ending_index:235, :]
 
 	#From left to right (bottom to top in reference to scipy.ndimage) of the image, crop out most of the image to the right of the road:
 	cropped_x_pixel_starting_index = 0
@@ -39,6 +40,6 @@ def crop_image(image, top_x_pixel_removal_count=60, bottom_x_pixel_removal_count
 	for cropped_x_pixel_index in range(cropped_x_pixel_starting_index, cropped_x_pixel_ending_index+1):
 		y_pixel_index = int(cropped_x_pixel_index * road_edge_slope) + y_intercept
 
-		cropped_image[cropped_x_pixel_index:, y_pixel_starting_index:y_pixel_index] = image[cropped_x_pixel_index+top_x_pixel_removal_count:x_pixel_count-bottom_x_pixel_removal_count, y_pixel_starting_index:y_pixel_index]
+		cropped_image[cropped_x_pixel_index:, y_pixel_starting_index:y_pixel_index, :] = image[cropped_x_pixel_index+top_x_pixel_removal_count:x_pixel_count-bottom_x_pixel_removal_count, y_pixel_starting_index:y_pixel_index, :]
 
 	return cropped_image
