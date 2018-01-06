@@ -1,0 +1,2 @@
+*.npy
+model_checkpoint_*
