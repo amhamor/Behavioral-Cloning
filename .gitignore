@@ -1,2 +1,3 @@
 *.npy
+./linux_sim
 model_checkpoint_*
