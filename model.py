@@ -4,7 +4,7 @@ from data_generation import *
 from training_and_evaluation import *
 
 #Tunable parameters used to train the convolutional neural network:
-training_driving_log_file_path = './training_data/training_driving_log.csv'
+training_driving_log_file_path = './training_data/driving_log.csv'
 validation_driving_log_file_path = './training_data/validation_driving_log.csv'
 
 weights_file_path = ''
