@@ -1,3 +1,4 @@
 *.npy
+linux_sim/linux_sim_Data/sharedassets1.assets.resS
 ./linux_sim/*
 model_checkpoint_*
