@@ -5,13 +5,13 @@ from keras.callbacks import ModelCheckpoint
 ###Architecture
 ##Build and implement the architecture into the optimizer and accuracy calculator.
 
+#Convolutional neural network architecture:
 def create_model(image_shape):
 	print('Creating steering angle prediction model.')
 
 	model = Sequential() #image_shape = 75x320
 
 	#Convolutional layers:
-	print('image_shape: {}'.format(image_shape))
 	model.add(Convolution2D(nb_filter=24, nb_row=5, nb_col=5, activation='relu', border_mode='valid', subsample=(2, 2), input_shape=image_shape)) #image shape: 35x158
 	model.add(Convolution2D(nb_filter=36, nb_row=5, nb_col=5, activation='relu', border_mode='valid', subsample=(2 ,2))) #image shape: 15x77
 	model.add(Convolution2D(nb_filter=48, nb_row=5, nb_col=5, activation='relu', border_mode='valid', subsample=(2, 2))) #image shape: 5x36
@@ -24,7 +24,7 @@ def create_model(image_shape):
 	model.add(Dense(output_dim=100, activation='linear'))
 	model.add(Dropout(0.50))
 	model.add(Dense(output_dim=50, activation='linear'))
-	#model.add(Dropout(0.50))
+	model.add(Dropout(0.50))
 	model.add(Dense(output_dim=10, activation='linear'))
 
 	#Output layer:
@@ -32,8 +32,7 @@ def create_model(image_shape):
 
 	return model
 
-###Train and Evaluate Convolutional Neural Network:
-
+#If a model file is being loaded, load this file:
 def load_pretrained_weights(weights_file_path, image_shape):
 	print('Loading pretrained weights.')
 	model = create_model(image_shape=image_shape)
@@ -41,8 +40,7 @@ def load_pretrained_weights(weights_file_path, image_shape):
 	print('Weights loaded from {}'.format(weights_file_path))
 	return model
 
-#validation_generator, nb_val_samples=validation_image_count,
-
+#Train and evaluate the convolutional neural network:
 def train_model(train_generator, nb_epoch, checkpoint, validation_data, nb_val_samples, batch_size, samples_per_epoch, initial_epoch, image_shape, weights_file_path):
 	if weights_file_path != '':
 		model = load_pretrained_weights(weights_file_path=weights_file_path, image_shape=image_shape)
@@ -56,4 +54,4 @@ def train_model(train_generator, nb_epoch, checkpoint, validation_data, nb_val_s
 	model.fit_generator(generator=train_generator, samples_per_epoch=samples_per_epoch, nb_epoch=nb_epoch, callbacks=[checkpoint], validation_data=validation_data, nb_val_samples=nb_val_samples, initial_epoch=initial_epoch)
 
 	#Save the model as a .h5 file.
-	#model.save(training_driving_log_file_path[16:] + '_model.h5')
+	model.save('model.h5')
