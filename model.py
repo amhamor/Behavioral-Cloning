@@ -25,5 +25,5 @@ validation_generator = image_and_steering_angle_generator(csv_file_path=validati
 
 checkpoint = ModelCheckpoint(filepath='model_checkpoint_' + training_driving_log_file_path[16:] + '_{epoch}_{loss}.hdf5')
 
-#Pass the above values into the training_and_evaluation.py function that creates then trains the convoluntional neural network:
+#Pass the above values into the training_and_evaluation.py function that creates then trains the convolutional neural network:
 train_model(train_generator=train_generator, nb_epoch=nb_epoch, checkpoint=checkpoint, validation_data=validation_generator, nb_val_samples=validation_image_count, batch_size=batch_size, samples_per_epoch=train_image_count, initial_epoch=initial_epoch, image_shape=image_shape, weights_file_path=weights_file_path)
