@@ -33,13 +33,14 @@ def get_row_count_and_image_shape(csv_file_path):
 			if index == 0:
 				image_file_path = row['Center Camera Images']
 				image = mpimg.imread(fname=image_file_path)
-				image = crop_image(image=image)
-				#image = np.expand_dims(image, axis=2)
+				image = convert_rgb_to_grayscale(image)
+				image = crop_grayscale_image(grayscale_image=image)
 				image_shape = image.shape
 			else:
 				pass
 			row_count += 1
 		return (row_count, image_shape)
+
 
 def image_and_steering_angle_generator(csv_file_path, batch_size):
 	center_image_file_paths_generator = dict_reader_batch_generator(csv_file_path=csv_file_path, batch_size=batch_size, header='Center Camera Images')
@@ -52,18 +53,22 @@ def image_and_steering_angle_generator(csv_file_path, batch_size):
 
 	for image_file_paths_generator in image_file_path_generators_list:
 		for image_file_paths_batch, steering_angles_batch in zip(image_file_paths_generator, steering_angles_generator):
+			steering_angles_batch = steering_angles_batch.astype(np.float)
+
 			if image_file_paths_generator == left_image_file_paths_generator:
-				steering_angles_batch += 0.1
+				print("image_file_paths_generator == left_image_file_paths_generator")
+				steering_angles_batch += 0.025 #* abs(steering_angles_batch)
 			if image_file_paths_generator == right_image_file_paths_generator:
-				steering_angles_batch -= 0.1
+				print("image_file_paths_generator == right_image_file_paths_generator")
+				steering_angles_batch -= 0.025 #* abs(steering_angles_batch)
 
 			image_file_paths_batch_size = len(image_file_paths_batch)
 			
 			for image_file_paths_batch_index, image_file_path in enumerate(image_file_paths_batch):
 				image = mpimg.imread(fname=image_file_path)
-				image = crop_image(image=image)
+				image = convert_rgb_to_grayscale(image)
+				image = crop_grayscale_image(grayscale_image=image)
 				image = normalize_image(image=image)
-				#image = np.expand_dims(image, axis=2)
 
 				image_shape_as_list = list(image.shape)
 
@@ -73,3 +78,4 @@ def image_and_steering_angle_generator(csv_file_path, batch_size):
 				processed_images_batch_array[image_file_paths_batch_index] = image
 
 			yield (processed_images_batch_array, steering_angles_batch)
+
