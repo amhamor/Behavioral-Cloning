@@ -22,7 +22,7 @@ epochs = 10000
 train_row_count, image_shape = get_row_count_and_image_shape(csv_file_path=training_driving_log_file_path)
 train_image_count = train_row_count * 3
 
-steps_per_epoch = train_image_count
+steps_per_epoch = train_image_count / batch_size
 
 #validation_row_count, _ = get_row_count_and_image_shape(csv_file_path=validation_driving_log_file_path)
 #validation_image_count = validation_row_count * 3
@@ -47,35 +47,35 @@ def create_model(image_shape):
 
 	#Convolutional layers:
 	model.add(Convolution2D(activation='relu', padding='valid', kernel_size=(5, 5), filters=24, strides=(2, 2), input_shape=image_shape)) #image shape: 35x158
-	model.add(Convolution2D(activation='relu', padding='same', kernel_size=(5, 5), filters=24)) #image shape: 35x158
-	model.add(Convolution2D(activation='relu', padding='valid', kernel_size=(5, 5), filters=36, strides=(2, 2))) #image shape: 15x77
-	model.add(Convolution2D(activation='relu', padding='same', kernel_size=(5, 5), filters=36)) #image shape: 15x77
-	model.add(Convolution2D(activation='relu', padding='valid', kernel_size=(5, 5), filters=48, strides=(2, 2))) #image shape: 5x36
-	model.add(Convolution2D(activation='relu', padding='same', kernel_size=(3, 3), filters=64)) #image shape: 3x34
-	model.add(Convolution2D(activation='relu', padding='valid', kernel_size=(3, 3), filters=64)) #image shape: 1x32
+	#model.add(Convolution2D(activation='relu', padding='same', kernel_size=(5, 5), filters=24)) #image shape: 35x158
+	#model.add(Convolution2D(activation='relu', padding='valid', kernel_size=(5, 5), filters=36, strides=(2, 2))) #image shape: 15x77
+	#model.add(Convolution2D(activation='relu', padding='same', kernel_size=(5, 5), filters=36)) #image shape: 15x77
+	#model.add(Convolution2D(activation='relu', padding='valid', kernel_size=(5, 5), filters=48, strides=(2, 2))) #image shape: 5x36
+	#model.add(Convolution2D(activation='relu', padding='same', kernel_size=(3, 3), filters=64)) #image shape: 3x34
+	#model.add(Convolution2D(activation='relu', padding='valid', kernel_size=(3, 3), filters=64)) #image shape: 1x32
 
 	#Classification layers:
 	model.add(Flatten())
 
-	model.add(Dense(units=400, activation='linear'))
-	model.add(Dense(units=350, activation='linear'))
-	model.add(Dense(units=300, activation='linear'))
-	model.add(Dense(units=250, activation='linear'))
-	model.add(Dense(units=200, activation='linear'))
+	#model.add(Dense(units=400, activation='linear'))
+	#model.add(Dense(units=350, activation='linear'))
+	#model.add(Dense(units=300, activation='linear'))
+	#model.add(Dense(units=250, activation='linear'))
+	#model.add(Dense(units=200, activation='linear'))
 	model.add(Dense(units=100, activation='linear'))
 	#model.add(Dropout(0.50))
-	model.add(Dense(units=70, activation='linear'))
-	model.add(Dense(units=60, activation='linear'))
-	model.add(Dense(units=50, activation='linear'))
-	model.add(Dense(units=40, activation='linear'))
-	model.add(Dense(units=30, activation='linear'))
+	#model.add(Dense(units=70, activation='linear'))
+	#model.add(Dense(units=60, activation='linear'))
+	#model.add(Dense(units=50, activation='linear'))
+	#model.add(Dense(units=40, activation='linear'))
+	#model.add(Dense(units=30, activation='linear'))
 	model.add(Dense(units=20, activation='linear'))
 	#model.add(Dropout(0.50))
-	model.add(Dense(units=10, activation='linear'))
-	model.add(Dense(units=9, activation='linear'))
-	model.add(Dense(units=8, activation='linear'))
-	model.add(Dense(units=7, activation='linear'))
-	model.add(Dense(units=6, activation='linear'))
+	#model.add(Dense(units=10, activation='linear'))
+	#model.add(Dense(units=9, activation='linear'))
+	#model.add(Dense(units=8, activation='linear'))
+	#model.add(Dense(units=7, activation='linear'))
+	#model.add(Dense(units=6, activation='linear'))
 	model.add(Dense(units=5, activation='linear'))
 
 	#Output layer:

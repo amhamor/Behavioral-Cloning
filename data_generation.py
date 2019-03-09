@@ -6,6 +6,8 @@ from image_processor import *
 
 from keras.utils.np_utils import to_categorical
 
+import matplotlib.pyplot as pyplot
+
 def dict_reader_batch_generator(csv_file_path, batch_size, header):
 	while True:
 		with open(csv_file_path) as csv_file_object:
@@ -19,6 +21,7 @@ def dict_reader_batch_generator(csv_file_path, batch_size, header):
 
 				if index % batch_size == batch_size - 1:
 					yield np.array(batch_list)
+
 			if index % batch_size != batch_size - 1:
 				last_batch_size = index % batch_size + 1
 				yield np.array(batch_list[:last_batch_size])
@@ -63,19 +66,22 @@ def image_and_steering_angle_generator(csv_file_path, batch_size):
 				steering_angles_batch -= 0.025 #* abs(steering_angles_batch)
 
 			image_file_paths_batch_size = len(image_file_paths_batch)
-			
+
 			for image_file_paths_batch_index, image_file_path in enumerate(image_file_paths_batch):
 				image = mpimg.imread(fname=image_file_path)
 				image = convert_rgb_to_grayscale(image)
 				image = crop_grayscale_image(grayscale_image=image)
+				pyplot.imshow(image)
 				image = normalize_image(image=image)
 
 				image_shape_as_list = list(image.shape)
 
 				if image_file_paths_batch_index == 0:
 					processed_images_batch_array = np.empty(shape=[image_file_paths_batch_size] + image_shape_as_list)
-				
+
 				processed_images_batch_array[image_file_paths_batch_index] = image
 
-			yield (processed_images_batch_array, steering_angles_batch)
+			#yield (processed_images_batch_array, steering_angles_batch)
+
+image_and_steering_angle_generator("./driving_log_for_viewing_cropped_images.csv", 1)
 
