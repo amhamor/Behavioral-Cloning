@@ -1,6 +1,14 @@
 import numpy as np
+import cv2
 
 def normalize_image(image, maximum_pixel_value=255, minimum_pixel_value=0):
+	#flattened_y_channel = image[:, :, 0].flatten()
+	#flattened_u_channel = image[:, :, 1].flatten()
+	#flattened_v_channel = image[:, :, 2].flatten()
+
+	#print("min(flattened_y_channel): " + str(min(flattened_y_channel)))
+	#print("max(flattened_y_channel): " + str(max(flattened_y_channel)))
+
 	return (image - minimum_pixel_value) / (maximum_pixel_value - minimum_pixel_value) - 0.5
 
 
@@ -8,6 +16,12 @@ def convert_rgb_to_grayscale(rgb_image):
 	two_dimensional_grayscale_image = np.dot(rgb_image[...,:3], [0.2989, 0.5870, 0.1140])
 	three_dimensional_grayscale_image = np.expand_dims(two_dimensional_grayscale_image, axis=2)
 	return three_dimensional_grayscale_image
+
+
+def convert_rgb_to_yuv(rgb_image):
+	yuv_image = cv2.cvtColor(rgb_image, cv2.COLOR_RGB2YUV)	
+
+	return yuv_image
 
 
 def crop_grayscale_image(grayscale_image, top_x_pixel_removal_count=60, bottom_x_pixel_removal_count=25):
@@ -21,7 +35,7 @@ def crop_grayscale_image(grayscale_image, top_x_pixel_removal_count=60, bottom_x
 	return cropped_grayscale_image
 
 
-def crop_rgb_image(rgb_image, top_x_pixel_removal_count=60, bottom_x_pixel_removal_count=25):
+def crop_three_dimensional_image(rgb_image, top_x_pixel_removal_count=60, bottom_x_pixel_removal_count=25):
 #The following x and y variables are in reference to scipy.ndimage (i.e. the origin is in the top left corner of the image):
 	x_pixel_count = rgb_image.shape[0]
 	y_pixel_count = rgb_image.shape[1]
@@ -31,37 +45,5 @@ def crop_rgb_image(rgb_image, top_x_pixel_removal_count=60, bottom_x_pixel_remov
 
 	cropped_rgb_image = rgb_image[top_x_pixel_removal_count:x_pixel_count-bottom_x_pixel_removal_count, :, :]
 
-	'''
-	#From right to left (top to bottom in reference to scipy.ndimage) of the image, crop out most of the image to the left of the road:
-	cropped_x_pixel_starting_index = 15
-	cropped_x_pixel_ending_index = 0
-	y_pixel_starting_index = 0
-	y_pixel_ending_index = 77
-
-	road_edge_slope = (y_pixel_ending_index - y_pixel_starting_index) / (cropped_x_pixel_ending_index - cropped_x_pixel_starting_index)
-	y_intercept = y_pixel_ending_index
-
-	for cropped_x_pixel_index in range(cropped_x_pixel_starting_index, cropped_x_pixel_ending_index-1, -1):
-		y_pixel_index = int(cropped_x_pixel_index * road_edge_slope) + y_intercept
-
-		cropped_image[cropped_x_pixel_index:, y_pixel_index:y_pixel_ending_index, :] = image[cropped_x_pixel_index+top_x_pixel_removal_count:x_pixel_count-bottom_x_pixel_removal_count, y_pixel_index:y_pixel_ending_index, :]
-
-	#Crop a rectangle in the middle of the image.
-	cropped_image[:, y_pixel_ending_index:235, :] = image[top_x_pixel_removal_count:x_pixel_count-bottom_x_pixel_removal_count, y_pixel_ending_index:235, :]
-
-	#From left to right (bottom to top in reference to scipy.ndimage) of the image, crop out most of the image to the right of the road:
-	cropped_x_pixel_starting_index = 0
-	cropped_x_pixel_ending_index = 38
-	y_pixel_starting_index = 235
-	y_pixel_ending_index = y_pixel_count
-
-	road_edge_slope = (y_pixel_ending_index - y_pixel_starting_index) / (cropped_x_pixel_ending_index - cropped_x_pixel_starting_index)
-	y_intercept = y_pixel_starting_index
-
-	for cropped_x_pixel_index in range(cropped_x_pixel_starting_index, cropped_x_pixel_ending_index+1):
-		y_pixel_index = int(cropped_x_pixel_index * road_edge_slope) + y_intercept
-
-		cropped_image[cropped_x_pixel_index:, y_pixel_starting_index:y_pixel_index, :] = image[cropped_x_pixel_index+top_x_pixel_removal_count:x_pixel_count-bottom_x_pixel_removal_count, y_pixel_starting_index:y_pixel_index, :]
-	'''
-
 	return cropped_rgb_image
+

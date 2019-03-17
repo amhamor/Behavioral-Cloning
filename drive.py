@@ -65,6 +65,8 @@ def telemetry(sid, data):
 		image_array = np.asarray(image)
 		grayscale_image_array = convert_rgb_to_grayscale(image_array)
 		cropped_image_array = crop_grayscale_image(grayscale_image=grayscale_image_array)
+		#yuv_image_array = convert_rgb_to_yuv(image_array)
+		#cropped_image_array = crop_three_dimensional_image(yuv_image_array)
 		normalized_cropped_image_array = normalize_image(image=cropped_image_array)
 		#normalized_cropped_image_array = np.expand_dims(cropped_image_array, axis=3)
 
